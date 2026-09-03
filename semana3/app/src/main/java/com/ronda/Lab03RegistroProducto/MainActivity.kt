@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -24,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,7 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Lab03RegistroProductoTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    PantallaRegistro(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -78,7 +80,7 @@ fun PantallaRegistro(modifier: Modifier = Modifier){
                 label = {Text("Precio (S/.): ")},
                 modifier = Modifier.weight(1f)
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.width(16.dp))
             OutlinedTextField(
                 value = cantidad,
                 onValueChange = {cantidad = it},
@@ -98,7 +100,7 @@ fun PantallaRegistro(modifier: Modifier = Modifier){
         if (mostrarResumen) {
             val precioNum = precio.toDoubleOrNull() ?: 0.0
             val cantidadNum = cantidad.toIntOrNull() ?: 0
-            val importe = 0.0 // TODO: calcula precio x cantidad
+            val importe = precioNum * cantidadNum
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -107,14 +109,16 @@ fun PantallaRegistro(modifier: Modifier = Modifier){
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(nombre, style = MaterialTheme.typography.titleLarge)
-                    Text("Precio: S/ " + String.format("%.2f", precioNum))
-                    Text("Cantidad: " + String.format("%.2f", cantidadNum))
-                    Text("Importe Total: S/ ${String.format("%.2f", importe)}", style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
-                        ))
+                    Text("Precio: S/ " + "%.2f".format(precioNum))
+                    Text("Cantidad: " + cantidadNum)
+                    Text("Importe: S/ " + "%.2f".format(importe))
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Producto registrado correctamente",
+                color = Color(0xFF2E7D32)
+            )
         }
     }
 }
