@@ -99,8 +99,8 @@ fun PantallaRegistro(modifier: Modifier = Modifier){
                     if (nombre.isBlank() || precio.isBlank() || cantidad.isBlank()) {
                         mensajeError = "Por favor, completa todos los campos."
                         mostrarResumen = false
-                    } else if (precioNum == null || cantidadNum == null) {
-                        mensajeError = "Ingresa un precio y cantidad válidos."
+                    } else if (precioNum == null || cantidadNum == null || precioNum <= 0 || cantidadNum <= 0) { //se agrego validacion de numeros positivos
+                        mensajeError = "Ingresa un precio y cantidad válidos, y deben ser mayores a 0."
                         mostrarResumen = false
                     } else {
                         mensajeError = null
