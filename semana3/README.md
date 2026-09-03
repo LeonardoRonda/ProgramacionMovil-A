@@ -1,4 +1,4 @@
-titulo: Jetpack compose
+#titulo: Jetpack compose
 
 Estudiante: Leonardo Favio Ronda Vidalon
 
@@ -6,6 +6,9 @@ Descripcion: en este proyecto se creo un layout donde se crearon campos para ing
 boton de agragar productos como también un resumen del producto agregado.
 
 capturas de pantalla:
-<img width="811" height="988" alt="image" src="https://github.com/user-attachments/assets/05e904f3-9915-49cf-a9e5-ddda49acad27" />
 
-<img width="844" height="975" alt="image" src="https://github.com/user-attachments/assets/e8dc104f-76e9-4690-b618-2c4647819104" />
+<img width="503" height="960" alt="image" src="https://github.com/user-attachments/assets/6a7bf997-e5ce-40f7-8aad-01ec3c3020f5" />
+
+
+<img width="548" height="978" alt="image" src="https://github.com/user-attachments/assets/c7f3e8e6-c86d-4499-813a-53414573e9ee" />
+
