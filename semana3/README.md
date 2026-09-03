@@ -1,13 +1,22 @@
-titulo: Jetpack compose
+##titulo: Jetpack compose
 
-Estudiante: Leonardo Favio Ronda Vidalon
+##Estudiante: Leonardo Favio Ronda Vidalon
 
-Descripcion: en este proyecto se creo un layout donde se crearon campos para ingresar datos y un
+##Descripcion: en este proyecto se creo un layout donde se crearon campos para ingresar datos y un
 boton de agragar producos como también un resumen del producto agregado.
 
-¿qué pasaría si declaras las variables de los campos SIN remember?
+##¿qué pasaría si declaras las variables de los campos SIN remember?
 
 Lo que sucederia es que cada vez que el usuario interactuara con interfaz con los elementos que cambian de estado como los botones, lo que ocurre es que la interfaz se reinicia o vuelve a cargar en cada interacción, mientras que cuando se usa remember este guarda como una especie de memoria caché.
+
+##Capturas de pantalla
+
+<img width="497" height="818" alt="image" src="https://github.com/user-attachments/assets/9a819d21-9e43-4ff0-8bb0-f3c8cdf90c14" />
+
+<img width="472" height="639" alt="image" src="https://github.com/user-attachments/assets/5a20eb33-be2c-4bde-b1b0-66e1738e140a" />
+
+<img width="427" height="478" alt="image" src="https://github.com/user-attachments/assets/3d79a274-75f0-4d85-a838-dd07ee230065" />
+
 
 ## Bitácora de Prompts e Interacción con IA
 
