@@ -26,8 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ronda.Lab03RegistroProducto.ui.theme.Lab03RegistroProductoTheme
 
@@ -110,7 +108,7 @@ fun PantallaRegistro(modifier: Modifier = Modifier){
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(nombre, style = MaterialTheme.typography.titleLarge)
                     Text("Precio: S/ " + "%.2f".format(precioNum))
-                    Text("Cantidad: " + cantidadNum)
+                    Text("Cantidad: $cantidadNum")
                     Text("Importe: S/ " + "%.2f".format(importe))
                 }
             }
@@ -120,12 +118,5 @@ fun PantallaRegistro(modifier: Modifier = Modifier){
                 color = Color(0xFF2E7D32)
             )
         }
-    }
-}
-@Preview(showBackground = true)
-@Composable
-fun PantallaRegistroPreview(){
-    Lab03RegistroProductoTheme() {
-        PantallaRegistro()
     }
 }
