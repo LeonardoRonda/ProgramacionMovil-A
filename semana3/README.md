@@ -1,4 +1,4 @@
-#titulo: Jetpack compose
+##titulo: Jetpack compose
 
 Estudiante: Leonardo Favio Ronda Vidalon
 
