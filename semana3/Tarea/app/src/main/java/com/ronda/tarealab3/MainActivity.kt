@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ronda.tarealab3.ui.theme.TareaLab3Theme
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.text.style.TextAlign
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,7 +87,7 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                 Brush.verticalGradient(
                     colors = listOf(
                         Color(0xFFB983F6),
-                        Color(0xFFC3ABFF)
+                        Color(0xFFE5DDFC)
                     )
                 )
             )
@@ -211,7 +212,6 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                     onCheckedChange = {
                         confirmado = it
 
-                        // Si se desmarca, ocultamos el resultado
                         if (!it) {
                             calculado = false
                         }
@@ -234,7 +234,8 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                 Text(
                     text = "Asigna las notas y confirma para calcular",
                     fontSize = 12.sp,
-                    color = Color.Gray,
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(
                         vertical = 8.dp
                     )
@@ -348,7 +349,23 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
 
                         }
                     }
+                Text(
+                    text = " ✅ Promedio calculado correctamente",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF00BE2A),
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = "Desarrollado por Leonardo Favio Ronda Vidalon",
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
                 }
+
             }
         }
     }
