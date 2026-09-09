@@ -1,6 +1,5 @@
 package com.ronda.tarealab3
 
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,20 +16,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
-import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
-import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.SliderDefaults
-import androidx.compose.material3.SwitchColors
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -39,17 +41,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ronda.tarealab3.ui.theme.TareaLab3Theme
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             TareaLab3Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PantallaRegistroNotas(modifier = Modifier.padding(innerPadding))
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    PantallaRegistroNotas(
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
@@ -57,7 +62,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PantallaRegistroNotas(modifier: Modifier = Modifier){
+fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
+
     var notaFunProg by remember { mutableFloatStateOf(0f) }
     var notaPoo by remember { mutableFloatStateOf(0f) }
     var notaMovil by remember { mutableFloatStateOf(0f) }
@@ -65,11 +71,14 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
 
     var redondear by remember { mutableStateOf(false) }
     var confirmado by remember { mutableStateOf(false) }
+    var calculado by remember { mutableStateOf(false) }
+
     val colorsDegradado = listOf(
         Color(0xFF7F00FD),
         Color(0xFF43007C)
     )
-    Column (
+
+    Column(
         modifier = modifier
             .fillMaxSize()
             .background(
@@ -81,13 +90,21 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
                 )
             )
             .verticalScroll(rememberScrollState())
+    ) {
 
-    ){
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(brush = Brush.horizontalGradient(colors = colorsDegradado))
-                .padding(vertical = 16.dp, horizontal = 20.dp)
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = colorsDegradado
+                    )
+                )
+                .padding(
+                    vertical = 16.dp,
+                    horizontal = 20.dp
+                )
         ) {
             Text(
                 text = "Registro de Notas",
@@ -98,12 +115,16 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
             )
         }
 
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+
             Text(
                 text = "Notas del ciclo",
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
             )
+
             Text(
                 text = "Desliza para asignar cada nota (0 a 20)",
                 fontSize = 12.sp,
@@ -111,25 +132,64 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
                 modifier = Modifier.padding(bottom = 12.dp)
             )
 
-            // Controles de Cursos
-            Curso("Fundamentos de Programación", 20, notaFunProg) { notaFunProg = it }
-            Curso("Programación Orientada a Objetos", 25, notaPoo) { notaPoo = it }
-            Curso("Programación en Móviles", 30, notaMovil) { notaMovil = it }
-            Curso("Base de Datos", 25, notaBd) { notaBd = it }
+            // CURSOS
+            Curso(
+                nombre = "Fundamentos de Programación",
+                peso = 20,
+                nota = notaFunProg
+            ) {
+                notaFunProg = it
+                calculado = false
+            }
+
+            Curso(
+                nombre = "Programación Orientada a Objetos",
+                peso = 25,
+                nota = notaPoo
+            ) {
+                notaPoo = it
+                calculado = false
+            }
+
+            Curso(
+                nombre = "Programación en Móviles",
+                peso = 30,
+                nota = notaMovil
+            ) {
+                notaMovil = it
+                calculado = false
+            }
+
+            Curso(
+                nombre = "Base de Datos",
+                peso = 25,
+                nota = notaBd
+            ) {
+                notaBd = it
+                calculado = false
+            }
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Control Switch
+            // SWITCH
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Redondear promedio final", fontSize = 13.sp, color = Color.DarkGray)
+
+                Text(
+                    text = "Redondear promedio final",
+                    fontSize = 13.sp,
+                    color = Color.DarkGray
+                )
 
                 Switch(
                     checked = redondear,
-                    onCheckedChange = { redondear = it },
+                    onCheckedChange = {
+                        redondear = it
+                        calculado = false
+                    },
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = Color(0xFF7F00FD),
                         checkedTrackColor = Color(0xFFE0C7FF),
@@ -138,6 +198,8 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
                     )
                 )
             }
+
+            // CHECKBOX
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -147,6 +209,11 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
                     checked = confirmado,
                     onCheckedChange = {
                         confirmado = it
+
+                        // Si se desmarca, ocultamos el resultado
+                        if (!it) {
+                            calculado = false
+                        }
                     },
                     colors = CheckboxDefaults.colors(
                         checkedColor = Color(0xFF7F00FD),
@@ -160,27 +227,119 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
                     fontSize = 13.sp
                 )
             }
+
+            // MENSAJE ANTES DE CALCULAR
+            if (!calculado) {
+                Text(
+                    text = "Asigna las notas y confirma para calcular",
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(
+                        vertical = 8.dp
+                    )
+                )
+            }
+
+            // BOTÓN
+            Button(
+                onClick = {
+                    calculado = true
+                },
+                enabled = confirmado,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("CALCULAR PROMEDIO")
+            }
+
+            // RESULTADOS
+            if (calculado) {
+
+                Spacer(
+                    modifier = Modifier.height(16.dp)
+                )
+
+                val promedioCalculado =
+                    (notaFunProg * 0.20f) +
+                            (notaPoo * 0.25f) +
+                            (notaMovil * 0.30f) +
+                            (notaBd * 0.25f)
+
+                val promedioFinal =
+                    if (redondear) {
+                        kotlin.math.round(promedioCalculado)
+                    } else {
+                        promedioCalculado
+                    }
+
+                Card(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+
+                    Column(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+
+                        Text(
+                            text = "Resultados",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF5800D2)
+                        )
+
+                        Spacer(
+                            modifier = Modifier.height(12.dp)
+                        )
+
+                        Text(
+                            text = "Promedio ponderado: ${promedioCalculado}"
+                        )
+
+                        Text(
+                            text = "Promedio final: ${"%.2f".format(promedioFinal)}",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF5800D2)
+                        )
+
+                        if (redondear) {
+                            Text(
+                                text = "Promedio redondeado",
+                                fontSize = 12.sp,
+                                color = Color.Gray
+                            )
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
 fun Curso(
-    nombre : String,
+    nombre: String,
     peso: Int,
     nota: Float,
     onNotaChange: (Float) -> Unit
+) {
+
+    Column(
+        modifier = Modifier.padding(
+            vertical = 4.dp
+        )
     ) {
-    Column(modifier = Modifier.padding(vertical = 4.dp)) {
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
+
             Text(
                 text = "$nombre ($peso%)",
                 fontWeight = FontWeight.Medium,
                 fontSize = 13.sp
             )
+
             Text(
                 text = "${nota.toInt()}",
                 fontWeight = FontWeight.Bold,
@@ -188,18 +347,19 @@ fun Curso(
                 color = Color(0xFF5800D2)
             )
         }
+
         Slider(
             value = nota,
-            onValueChange = onNotaChange,
+            onValueChange = {
+                onNotaChange(it.toInt().toFloat())
+            },
             valueRange = 0f..20f,
-            steps = 19 ,
+            steps = 19,
             colors = SliderDefaults.colors(
                 thumbColor = Color(0xFF7F00FD),
                 activeTrackColor = Color(0xFF7F00FD),
                 inactiveTrackColor = Color(0xFFD0B8F5)
             )
-
         )
     }
 }
-
