@@ -17,11 +17,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SwitchColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -121,9 +126,38 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text("Redondear promedio final", fontSize = 13.sp, color = Color.DarkGray)
+
                 Switch(
                     checked = redondear,
-                    onCheckedChange = { redondear = it }
+                    onCheckedChange = { redondear = it },
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = Color(0xFF7F00FD),
+                        checkedTrackColor = Color(0xFFE0C7FF),
+                        uncheckedThumbColor = Color(0xFF4B4B4B),
+                        uncheckedTrackColor = Color.Transparent
+                    )
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Checkbox(
+                    checked = confirmado,
+                    onCheckedChange = {
+                        confirmado = it
+                    },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF7F00FD),
+                        uncheckedColor = Color(0xFF4B4B4B),
+                        checkmarkColor = Color.White
+                    )
+                )
+
+                Text(
+                    text = "Confirmo que las notas son correctas",
+                    fontSize = 13.sp
                 )
             }
         }
@@ -151,14 +185,20 @@ fun Curso(
                 text = "${nota.toInt()}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 13.sp,
-                color = Color(0xFF6B21A8)
+                color = Color(0xFF5800D2)
             )
         }
         Slider(
             value = nota,
             onValueChange = onNotaChange,
             valueRange = 0f..20f,
-            steps = 19
+            steps = 19 ,
+            colors = SliderDefaults.colors(
+                thumbColor = Color(0xFF7F00FD),
+                activeTrackColor = Color(0xFF7F00FD),
+                inactiveTrackColor = Color(0xFFD0B8F5)
+            )
+
         )
     }
 }
