@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ronda.tarealab3.ui.theme.TareaLab3Theme
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -251,18 +252,18 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                 Text("CALCULAR PROMEDIO")
             }
 
-            // RESULTADOS
+
             if (calculado) {
 
                 Spacer(
                     modifier = Modifier.height(16.dp)
                 )
 
-                val promedioCalculado =
-                    (notaFunProg * 0.20f) +
-                            (notaPoo * 0.25f) +
-                            (notaMovil * 0.30f) +
-                            (notaBd * 0.25f)
+                val promedioCalculado = kotlin.math.round(
+                    ((notaFunProg * 0.20f) +
+                                    (notaPoo * 0.25f) +
+                                    (notaMovil * 0.30f) +
+                                    (notaBd * 0.25f)) * 100) / 100
 
                 val promedioFinal =
                     if (redondear) {
@@ -270,6 +271,24 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                     } else {
                         promedioCalculado
                     }
+                val estado = when {
+                    promedioFinal >= 17 -> "EXCELENTE"
+                    promedioFinal >= 13 -> "APROBADO"
+                    promedioFinal >= 10 -> "EN RECUPERACIÓN"
+                    else -> "DESAPROBADO"
+                }
+                val colorestado = when {
+                    promedioFinal >= 17 -> Color(0xFFA5D6A7)
+                    promedioFinal >= 13 -> Color(0xFFC8E6C9)
+                    promedioFinal >= 10 -> Color(0xFFFFD54F)
+                    else -> Color(0xFFEF9A9A)
+                }
+                val colorletraestado = when {
+                    promedioFinal >= 17 -> Color(0xFF0D4F1C)
+                    promedioFinal >= 13 -> Color(0xFF087F23)
+                    promedioFinal >= 10 -> Color(0xFFB26A00)
+                    else -> Color(0xFFB71C1C)
+                }
 
                 Card(
                     modifier = Modifier.fillMaxWidth()
@@ -308,12 +327,31 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                                 color = Color.Gray
                             )
                         }
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    color = colorestado,
+                                    shape = RoundedCornerShape(50)
+                                )
+                                .padding(
+                                    horizontal = 16.dp,
+                                    vertical = 8.dp
+                                )
+                        ) {
+                            Text(
+                                text = estado,
+                                color = colorletraestado,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp
+                            )
+                        }
+
+                        }
                     }
                 }
             }
         }
     }
-}
 
 @Composable
 fun Curso(
