@@ -16,10 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
@@ -70,7 +67,14 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
     Column (
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFBA95FF))
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFB983F6),
+                        Color(0xFFC3ABFF)
+                    )
+                )
+            )
             .verticalScroll(rememberScrollState())
 
     ){
@@ -88,46 +92,39 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier){
                 )
             )
         }
-        Card (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "Notas del ciclo",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = "Notas del ciclo",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+            Text(
+                text = "Desliza para asignar cada nota (0 a 20)",
+                fontSize = 12.sp,
+                color = Color.Black,
+                modifier = Modifier.padding(bottom = 12.dp)
+            )
+
+            // Controles de Cursos
+            Curso("Fundamentos de Programación", 20, notaFunProg) { notaFunProg = it }
+            Curso("Programación Orientada a Objetos", 25, notaPoo) { notaPoo = it }
+            Curso("Programación en Móviles", 30, notaMovil) { notaMovil = it }
+            Curso("Base de Datos", 25, notaBd) { notaBd = it }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Control Switch
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("Redondear promedio final", fontSize = 13.sp, color = Color.DarkGray)
+                Switch(
+                    checked = redondear,
+                    onCheckedChange = { redondear = it }
                 )
-                Text(
-                    text = "Desliza para asignar cada nota (0 a 20)",
-                    fontSize = 12.sp,
-                    color = Color.Gray,
-                    modifier = Modifier.padding(bottom = 12.dp)
-                )
-
-                // Controles de Cursos
-                Curso("Fundamentos de Programación", 20, notaFunProg) { notaFunProg = it }
-                Curso("Programación Orientada a Objetos", 25, notaPoo) { notaPoo = it }
-                Curso("Programación en Móviles", 30, notaMovil) { notaMovil = it }
-                Curso("Base de Datos", 25, notaBd) { notaBd = it }
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                // Control Switch
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text("Redondear promedio final", fontSize = 13.sp, color = Color.DarkGray)
-                    Switch(
-                        checked = redondear,
-                        onCheckedChange = { redondear = it }
-                    )
-                }
             }
         }
     }
