@@ -66,6 +66,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
 
+    //VARIABLES
     var notaFunProg by remember { mutableFloatStateOf(0f) }
     var notaPoo by remember { mutableFloatStateOf(0f) }
     var notaMovil by remember { mutableFloatStateOf(0f) }
@@ -242,7 +243,7 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                 )
             }
 
-            // BOTÓN
+            // BOTONES
             Button(
                 onClick = {
                     calculado = true
@@ -251,6 +252,21 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("CALCULAR PROMEDIO")
+            }
+            Button(
+                onClick = {
+                    notaFunProg = 0f
+                    notaPoo = 0f
+                    notaMovil = 0f
+                    notaBd = 0f
+
+                    redondear = false
+                    confirmado = false
+                    calculado = false
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("LIMPIAR")
             }
 
 
@@ -451,7 +467,7 @@ fun Curso(
             }
 
         }
-
+        //SLIDER
         Slider(
             value = nota,
             onValueChange = {
