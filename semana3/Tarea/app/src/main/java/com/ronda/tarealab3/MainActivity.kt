@@ -426,13 +426,30 @@ fun Curso(
                 fontWeight = FontWeight.Medium,
                 fontSize = 13.sp
             )
+            Box(
+                modifier = Modifier
+                    .background(
+                        color = Color(0x81E1BCFF).copy(alpha = 0.6f),
+                        shape = RoundedCornerShape(50)
+                    )
+                    .padding(
+                        horizontal = 8.dp,
+                        vertical = 3.dp
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "${nota.toInt()}",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp,
+                    color = if (nota < 13) {
+                        Color(0xFFC40000)
+                    } else {
+                        Color(0xFF008F1B)
+                    }
+                )
+            }
 
-            Text(
-                text = "${nota.toInt()}",
-                fontWeight = FontWeight.Bold,
-                fontSize = 13.sp,
-                color = Color(0xFF5800D2)
-            )
         }
 
         Slider(
