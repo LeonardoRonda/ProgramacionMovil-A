@@ -195,7 +195,7 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                     colors = SwitchDefaults.colors(
                         checkedThumbColor = Color(0xFF7F00FD),
                         checkedTrackColor = Color(0xFFE0C7FF),
-                        uncheckedThumbColor = Color(0xFF4B4B4B),
+                        uncheckedThumbColor = Color(0xFF2D2D2D),
                         uncheckedTrackColor = Color.Transparent
                     )
                 )
@@ -311,7 +311,39 @@ fun PantallaRegistroNotas(modifier: Modifier = Modifier) {
                         )
 
                         Text(
-                            text = "Promedio ponderado: ${promedioCalculado}"
+                            text = "Fundamentos de Programación: \n${notaFunProg.toInt()} × 20% = ${
+                                kotlin.math.round(notaFunProg * 0.20f * 100) / 100
+                            }",
+                            color = Color.DarkGray,
+                        )
+
+                        Text(
+                            text = "Programación Orientada a Objetos: \n${notaPoo.toInt()} × 25% = ${
+                                kotlin.math.round(notaPoo * 0.25f * 100) / 100
+                            }",
+                            color = Color.DarkGray,
+                        )
+
+                        Text(
+                            text = "Programación en Móviles: \n${notaMovil.toInt()} × 30% = ${
+                                kotlin.math.round(notaMovil * 0.30f * 100) / 100 
+                            }",
+                            color = Color.DarkGray,
+                        )
+
+                        Text(
+                            text = "Base de Datos: \n${notaBd.toInt()} × 25% = ${
+                                kotlin.math.round(notaBd * 0.25f * 100) / 100
+                            }",
+                            color = Color.DarkGray,
+                        )
+                        Spacer(
+                            modifier = Modifier.height(12.dp)
+                        )
+
+                        Text(
+                            text = "Promedio ponderado: ${promedioCalculado}",
+                            color = Color.DarkGray,
                         )
 
                         Text(
