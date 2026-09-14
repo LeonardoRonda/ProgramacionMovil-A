@@ -1,5 +1,6 @@
 package com.ronda.lab04
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,6 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 
 
 class MainActivity : ComponentActivity() {
@@ -77,12 +82,24 @@ fun ContadorConRemember(){
 @Composable
 fun TemperatureDisplay(){
     var temperatura by remember {mutableStateOf(20)}
+    val numberColor = when{
+        temperatura > 30 -> Color.Red
+        temperatura < 10 -> Color.Blue
+        else -> Color.Unspecified
+    }
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text="Temperatura: $temperatura °C",
+            text = buildAnnotatedString {
+                append("Temperatura: ")
+
+                // Cambia el color solo al numero
+                withStyle(style = SpanStyle(color = numberColor)) {
+                    append("$temperatura °C")
+                }
+            },
             fontWeight = FontWeight.Bold,
             style= MaterialTheme.typography.headlineMedium
         )
