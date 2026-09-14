@@ -1,10 +1,10 @@
-##Titulo: Desarrollo de una aplicación básica de control de tareas usando manejo de estados en
+**Titulo:** Desarrollo de una aplicación básica de control de tareas usando manejo de estados en
 Jetpack Compose
 
-##Estudiante: 
+**Estudiante:** 
 Leonardo Favio Ronda Vidalon
 
-##Descripción: 
+**Descripción:** 
 En esta actividad se desarrollo e implemento una interfaz con botones que actuan mediante estados es decir 
 interacciones con el usuario, se creó un contador de temperatura con botones de subir,bajar y resetear, 
 estos al pasar o disminuir de una temperatura establecida cambian el color del mensaje.
