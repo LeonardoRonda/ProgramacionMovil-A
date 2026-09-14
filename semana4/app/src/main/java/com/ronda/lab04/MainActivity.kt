@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
             Lab04Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-                        ContadorConRemember() // O ContadorRoto(), aunque se recomienda usar este
+                        TemperatureDisplay()
                     }
                 }
             }
@@ -71,4 +71,24 @@ fun ContadorConRemember(){
     }
 }
 
-
+@Composable
+fun TemperatureDisplay(){
+    var temperatura by remember {mutableStateOf(20)}
+    Column(
+        modifier = Modifier.padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text="Temperatura: $temperatura",
+            style= MaterialTheme.typography.headlineMedium
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = {temperatura++}) {
+            Text("Subir")
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = {temperatura--}) {
+            Text("Bajar")
+        }
+    }
+}
