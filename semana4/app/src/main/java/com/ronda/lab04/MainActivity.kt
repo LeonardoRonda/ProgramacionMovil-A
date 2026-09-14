@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -24,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.font.FontWeight
 
 
 class MainActivity : ComponentActivity() {
@@ -79,20 +82,28 @@ fun TemperatureDisplay(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text="Temperatura: $temperatura",
+            text="Temperatura: $temperatura °C",
+            fontWeight = FontWeight.Bold,
             style= MaterialTheme.typography.headlineMedium
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = {temperatura++}) {
-            Text("Subir")
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)){
+
+            Button(onClick = {temperatura++},
+                modifier = Modifier.weight(1f)) {
+                Text("Subir")
+            }
+
+            Button(onClick = {temperatura--},
+                modifier = Modifier.weight(1f)) {
+                Text("Bajar")
+            }
+
+            Button(onClick = {temperatura = 20},
+                modifier = Modifier.weight(1f)) {
+                Text("Resetear")
+            }
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = {temperatura--}) {
-            Text("Bajar")
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(onClick = {temperatura = 20}) {
-            Text("Resetear")
-        }
+
     }
 }
