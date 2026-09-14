@@ -166,3 +166,59 @@ fun PantallaTareasTecsup() {
     }
 }
 
+@Composable
+fun ItemTareaTecsup(
+    tarea: Tarea,
+    colorIconoTacho: Color,
+    onEliminar: () -> Unit,
+    onCambiarEstado: (Boolean) -> Unit
+) {
+    Card(
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.weight(1f)
+            ) {
+                // Checkbox para marcar/desmarcar
+                Checkbox(
+                    checked = tarea.completada,
+                    onCheckedChange = { onCambiarEstado(it) },
+                    colors = CheckboxDefaults.colors(
+                        checkedColor = Color(0xFF1B237E),
+                        uncheckedColor = Color.Gray
+                    )
+                )
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                // Nombre de la tarea
+                Text(
+                    text = tarea.nombre,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black
+                )
+            }
+
+            // Botón de tacho de basura para eliminar
+            IconButton(onClick = onEliminar) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Eliminar tarea",
+                    tint = colorIconoTacho
+                )
+            }
+        }
+    }
+}
