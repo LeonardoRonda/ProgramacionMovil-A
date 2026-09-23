@@ -11,18 +11,18 @@ import androidx.navigation.NavController
 
 @Composable
 fun ReservationsScreen(
-    navController: NavController
+    @Suppress("UNUSED_PARAMETER") navController: NavController,
 ) {
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
     ) {
 
         Text(
             "Mis reservas",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -34,16 +34,16 @@ fun ReservationsScreen(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 5.dp)
+                        .padding(vertical = 5.dp),
                 ) {
 
                     Column(
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(16.dp),
                     ) {
 
                         Text(
                             clase.nombre,
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
                         )
 
                         Text("${clase.hora} • ${clase.sala}")

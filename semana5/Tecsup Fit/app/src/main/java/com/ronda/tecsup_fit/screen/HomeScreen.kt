@@ -16,13 +16,13 @@ data class Clase(
     val id: Int,
     val nombre: String,
     val hora: String,
-    val sala: String
+    val sala: String,
 )
 
-val clases = listOf(
+val clases: List<Clase> = listOf(
     Clase(1, "Yoga funcional", "7:00 am", "Sala 2"),
     Clase(2, "Cross Training", "6:00 pm", "Sala 1"),
-    Clase(3, "Spinning", "7:30 pm", "Sala 3")
+    Clase(3, "Spinning", "7:30 pm", "Sala 3"),
 )
 
 @Composable
@@ -31,12 +31,12 @@ fun HomeScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
     ) {
 
         Text(
             text = "TECSUP Fit",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
 
         Text("Hola, Diego")

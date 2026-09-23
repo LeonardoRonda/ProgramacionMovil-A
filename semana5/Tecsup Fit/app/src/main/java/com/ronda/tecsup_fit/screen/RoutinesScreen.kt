@@ -9,18 +9,18 @@ import androidx.navigation.NavController
 
 @Composable
 fun RoutinesScreen(
-    navController: NavController
+    @Suppress("UNUSED_PARAMETER") navController: NavController,
 ) {
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp)
+            .padding(20.dp),
     ) {
 
         Text(
             "Rutinas",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
 
         Spacer(modifier = Modifier.height(25.dp))

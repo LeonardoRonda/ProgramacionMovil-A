@@ -9,32 +9,34 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ProfileScreen(
+    @Suppress("UNUSED_PARAMETER") navController: NavController,
+) {
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 
         Text(
             text = "Mi perfil",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
 
         Spacer(modifier = Modifier.height(30.dp))
 
         Text(
-            text = "DR",
-            style = MaterialTheme.typography.displaySmall
+            text = "LR",
+            style = MaterialTheme.typography.displaySmall,
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = "Diego Ramos",
-            style = MaterialTheme.typography.titleLarge
+            text = "Leonardo Ronda",
+            style = MaterialTheme.typography.titleLarge,
         )
 
         Text("Plan Premium")
@@ -42,13 +44,13 @@ fun ProfileScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(30.dp))
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(15.dp)
+            horizontalArrangement = Arrangement.spacedBy(15.dp),
         ) {
 
             Card {
                 Column(
                     modifier = Modifier.padding(20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text("14")
                     Text("Clases")
@@ -58,7 +60,7 @@ fun ProfileScreen(navController: NavController) {
             Card {
                 Column(
                     modifier = Modifier.padding(20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text("3")
                     Text("Rachas")

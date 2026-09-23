@@ -11,7 +11,7 @@ import com.ronda.tecsup_fit.navigation.Screen
 
 @Composable
 fun ConfirmationScreen(
-    navController: NavController
+    navController: NavController,
 ) {
 
     Column(
@@ -19,12 +19,12 @@ fun ConfirmationScreen(
             .fillMaxSize()
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
 
         Text(
             "✓",
-            style = MaterialTheme.typography.displayMedium
+            style = MaterialTheme.typography.displayMedium,
         )
 
         Spacer(modifier = Modifier.height(20.dp))
