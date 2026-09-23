@@ -2,10 +2,14 @@ package com.ronda.tecsup_fit.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val TecsupGreenPrimary = Color(0xFF0F5A47)
+val TecsupGreenLight = Color(0xFFD2EBD9)
+val TecsupGreenDark = Color(0xFF0A3E31)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val ConfirmadaGreenBg = Color(0xFFE2F7EB)
+val ConfirmadaGreenText = Color(0xFF1B6B56)
+
+val CompletadaGrayBg = Color(0xFFEEEEEE)
+val CompletadaGrayText = Color(0xFF616161)
+
+val CardBgColor = Color(0xFFF2F4F3)

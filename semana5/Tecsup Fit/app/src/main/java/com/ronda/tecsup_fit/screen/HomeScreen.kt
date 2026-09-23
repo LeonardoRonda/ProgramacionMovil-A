@@ -1,97 +1,198 @@
 package com.ronda.tecsup_fit.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FitnessCenter
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ronda.tecsup_fit.navigation.Screen
+import com.ronda.tecsup_fit.ui.theme.TecsupGreenLight
+import com.ronda.tecsup_fit.ui.theme.TecsupGreenPrimary
 
 data class Clase(
     val id: Int,
     val nombre: String,
     val hora: String,
     val sala: String,
+    val duracion: String = "45 min",
+    val descripcion: String = "Entrenamiento funcional de alta intensidad. Cupos limitados.",
+    val cuposDisponibles: String = "8 de 12 cupos disponibles",
+    val filtro: String = "Hoy",
 )
 
 val clases: List<Clase> = listOf(
-    Clase(1, "Yoga funcional", "7:00 am", "Sala 2"),
-    Clase(2, "Cross Training", "6:00 pm", "Sala 1"),
-    Clase(3, "Spinning", "7:30 pm", "Sala 3"),
+    Clase(
+        id = 1,
+        nombre = "Yoga funcional",
+        hora = "7:00 am",
+        sala = "Sala 2",
+        descripcion = "Sesión de flexibilidad y fuerza postural.",
+        cuposDisponibles = "5 de 15 cupos disponibles",
+        filtro = "Hoy",
+    ),
+    Clase(
+        id = 2,
+        nombre = "Cross Training",
+        hora = "6:00 pm",
+        sala = "Sala 1",
+        descripcion = "Entrenamiento funcional de alta intensidad. Cupos limitados.",
+        cuposDisponibles = "8 de 12 cupos disponibles",
+        filtro = "Hoy",
+    ),
+    Clase(
+        id = 3,
+        nombre = "Spinning",
+        hora = "7:30 pm",
+        sala = "Sala 3",
+        descripcion = "Clase de ciclismo de alta resistencia e intensidad.",
+        cuposDisponibles = "3 de 10 cupos disponibles",
+        filtro = "Esta semana",
+    ),
 )
 
 @Composable
 fun HomeScreen(navController: NavController) {
+    var selectedFilter by remember { mutableStateOf("Hoy") }
+
+    val filteredClases = if (selectedFilter == "Hoy") {
+        clases.filter { it.filtro == "Hoy" }
+    } else {
+        clases
+    }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = Modifier.fillMaxSize(),
     ) {
-
-        Text(
-            text = "TECSUP Fit",
-            style = MaterialTheme.typography.headlineMedium,
-        )
-
-        Text("Hola, Diego")
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        LazyRow {
-            items(listOf("Hoy", "Esta semana")) { filtro ->
-
-                AssistChip(
-                    onClick = {},
-                    label = {
-                        Text(filtro)
-                    },
-                    modifier = Modifier.padding(end = 8.dp)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(TecsupGreenPrimary)
+                .padding(horizontal = 20.dp, vertical = 24.dp),
+        ) {
+            Column {
+                Text(
+                    text = "TECSUP Fit",
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "Hola, Diego",
+                    color = TecsupGreenLight,
+                    fontSize = 14.sp,
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text(
-            text = "Clases disponibles",
-            style = MaterialTheme.typography.titleMedium
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        LazyColumn {
-
-            items(clases) { clase ->
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 5.dp)
-                        .clickable {
-                            navController.navigate(
-                                Screen.Detail.createRoute(clase.id)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp, vertical = 16.dp),
+        ) {
+            val filters = listOf("Hoy", "Esta semana")
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                items(filters) { filtro ->
+                    val isSelected = selectedFilter == filtro
+                    FilterChip(
+                        selected = isSelected,
+                        onClick = { selectedFilter = filtro },
+                        label = {
+                            Text(
+                                text = filtro,
+                                color = if (isSelected) Color.White else Color.Black,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
                             )
-                        }
-                ) {
+                        },
+                        shape = RoundedCornerShape(20.dp),
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = TecsupGreenPrimary,
+                            containerColor = Color(0xFFE8ECE9),
+                        ),
+                        border = null,
+                    )
+                }
+            }
 
-                    Column(
-                        modifier = Modifier.padding(16.dp)
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text(
+                text = "Clases disponibles",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                items(filteredClases) { clase ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                navController.navigate(
+                                    Screen.Detail.createRoute(clase.id),
+                                )
+                            },
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color(0xFFF0F3F1),
+                        ),
                     ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(48.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(TecsupGreenLight),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.FitnessCenter,
+                                    contentDescription = "Clase",
+                                    tint = TecsupGreenPrimary,
+                                )
+                            }
 
-                        Text(
-                            text = clase.nombre,
-                            style = MaterialTheme.typography.titleMedium
-                        )
+                            Spacer(modifier = Modifier.width(16.dp))
 
-                        Text(
-                            text = "${clase.hora} • ${clase.sala}"
-                        )
+                            Column {
+                                Text(
+                                    text = clase.nombre,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp,
+                                )
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = "${clase.hora} • ${clase.sala}",
+                                    color = Color.Gray,
+                                    fontSize = 13.sp,
+                                )
+                            }
+                        }
                     }
                 }
             }
