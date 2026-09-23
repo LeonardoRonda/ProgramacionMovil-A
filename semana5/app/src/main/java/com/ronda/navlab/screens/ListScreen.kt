@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.ronda.navlab.navigation.Screen
 
-@Optin(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(navController: NavController) {
     val items = (1..8).map { "Elemento número $it" }
