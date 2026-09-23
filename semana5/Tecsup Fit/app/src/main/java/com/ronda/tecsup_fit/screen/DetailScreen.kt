@@ -1,5 +1,7 @@
 package com.ronda.tecsup_fit.screen
 
+import com.ronda.tecsup_fit.navigation.Screen
+
 package com.ronda.tecsup_fit.screen
 
 import androidx.compose.foundation.layout.*
